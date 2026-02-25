@@ -1,5 +1,8 @@
 package com.linkedlist.doubly;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class Main {
 	public static void displayList(Node head) {
 		Node temp = head;
@@ -89,15 +92,49 @@ public class Main {
 		int cnt=0;
 		while(temp!=null) {
 			cnt++;
-			if(cnt==k-1) break;
+			if(k-1==cnt) break;
 			temp=temp.next;
 		}
 		
-		Node prev=temp.prev;
 		Node front=temp.next;
-		Node newNode=new Node(val, front, prev);
+		Node newNode=new Node(val, front, temp);
 		temp.next=newNode;
-		temp.prev=newNode;
+		front.prev=newNode;
+		
+		return head;
+	}
+
+	public static Node reverseLLBrute(Node head) {
+		Deque<Integer> stack = new ArrayDeque<>();
+		Node temp = head;
+
+		while (temp != null) {
+			stack.push(temp.data);
+			temp = temp.next;
+		}
+
+		temp = head;
+		while (temp != null) {
+			temp.data = stack.pop();
+			temp = temp.next;
+		}
+
+		return head;
+	}
+
+	public static Node reverseLL(Node head) {
+		Node current=head;
+		Node last=null;
+		
+		while(current!=null) {
+			last=current.prev;
+			current.prev=current.next;
+			current.next=last;
+			head=current;
+			current=current.prev;
+		}
+		
+		
 		return head;
 	}
 
@@ -109,7 +146,9 @@ public class Main {
 //		Node newNode=deleteAtTail(head);
 //		Node newNode = insertAtTail(head, 100);
 //		Node newNode=deleteAtK(head, 3);
-		Node newNode=insertAtK(head, 3, 100);
-		displayList(newNode);
+//		Node newNode=insertAtK(head, 3, 100);
+//		Node reverseNode=reverseLLBrute(head);
+		Node reverseNode = reverseLL(head);
+		displayList(reverseNode);
 	}
 }

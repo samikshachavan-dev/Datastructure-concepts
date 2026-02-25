@@ -13,22 +13,26 @@ public class SumofN {
 //	}
 //	Parameterized-No Backtracking involved
 
-	public static int f(int n) {
-		if (n == 0) {
-			return 0;
-		}
-		return n+f(n-1);
-
-	}
-
+//	public static int f(int n) {
+//		if(n==0) {
+//			return 0;
+//		}
+//		return n+f(n-1);
+//	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Scanner sc = new Scanner(System.in);
+		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter N:");
-		int n = sc.nextInt();
-		System.out.println(f(n));
-//		f(n,0);
+		int n=sc.nextInt();
+		System.out.println("Factorial "+fact(n));
+	}
+
+private static int fact(int n) {
+	if(n==0) {
+		return 1;
+	}
+	return n*fact(n-1);
+}
 
 	}
 
-}
+
